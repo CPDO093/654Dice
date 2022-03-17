@@ -16,8 +16,7 @@ namespace ConsoleApp1
         /// 6,5,4 - all at once
         /// 6 or 5 or 4 - remove that one
         /// First to order
-        /// NOTES:::
-        /// Englihs: Human lang def of the game
+        /// English: Human lang def of the game
         /// The Game
         /// Any number of players will take three turns rolling a collection of five dice hoping to match numbers 4, 5, and 6.
         /// The player has exactly THREE rolls to obtain a 4, 5, and 6 - and if that player obtains all three numbers within
@@ -26,28 +25,27 @@ namespace ConsoleApp1
         /// The game can end in a draw
         /// There is only one round for each player.
         /// THIS GAME WILL MOST DEFINITELY TERMINATE AT SOME POINT IN TIME
-        ///
         // Note: Game can be played with many players, but we are limiting to two.
         /// Computer language def of the game
         /// The game implying that that the memory of the players is keeping track of all previously seen numbers
         // Number of players in game
         public int numberOfPlayers { get => 2; set { } }
-        // Number of turns
+        // Number Of Turns
         public int numberOfTurns { get; set; }
-        // Number of Starting Dice
+        // Number Of Starting Dice
         public int numberOfDice { get; set; }
-        // Each player must have the ability to save their score
+        // Each Player Must Be Able To Save Their Score
         public int playerOneScore { get; set; }
         public int playerTwoScore { get; set; }
-        // Create a var that will store part of the rules for the game
-        // This var will help us determine if the player lands on one of these numbers
+        // Create A Var To Store Parts Of The Game
+        // This Var Helps Us Know If The Player Landed On One Of These Numbers
         public int[] rollDice = { 4, 5, 6 };
-        // Create a var that will store all the dice roll results for every turn
-        // *mutable array*
+        // Create A Var To Store All Roll Results
+        // *Mutable Array*
         public Dictionary<int, int> runTimeManager;
         public RollGame()
         {
-            // set intial game settings
+            // Intial Game Settings
             runTimeManager = new Dictionary<int, int>
             {
                 { 4, 0 },
@@ -58,13 +56,12 @@ namespace ConsoleApp1
             playerTwoScore = 0;
             numberOfDice = 5;
             numberOfTurns = 3;
-            //
         }
-        // Add the data to the runtime manager
+        // Add Data To Runtime Manager
         public List<int> RollDice(int numberOfDice)
         {
-            // Roll the given number of dice for one roll each
-            // Return the array of numbers turned up
+            // Roll Given Number Of Dice For Each Roll
+            // Return Array Of Numbers Turned Up
             List<int> diceRolled = new List<int>();
             Random roll = new Random();
             for (int i = 0; i < numberOfDice; i++)
@@ -73,7 +70,7 @@ namespace ConsoleApp1
             }
             return diceRolled;
         }
-        // determine whos turn it is
+        // Whos Turn Is It?
         public int WhosTurnIsIt(int player)
         {
             switch (player)
@@ -84,7 +81,7 @@ namespace ConsoleApp1
                     return 1;
             }
         }
-        // return the persons scorecard/game date
+        // Return Players Score Card/Data
         public string ReturnCard()
         {
             string message = @"Number of hits:
@@ -94,7 +91,7 @@ namespace ConsoleApp1
             ";
             return string.Format(message, runTimeManager[4], runTimeManager[5], runTimeManager[6]);
         }
-        // We need a method that will update the card at runtime
+        // Method To Update Card At Runtime
         public void UpdateCard(int diceRolled)
         {
             switch (diceRolled)
@@ -112,7 +109,7 @@ namespace ConsoleApp1
                     break;
             }
         }
-        // Need a method to reduce the number of dice
+        // Method To Reduce Number Of Dice
         public void RemoveDice(int numberToRemove)
         {
             numberOfDice = numberOfDice - numberToRemove;
@@ -147,14 +144,3 @@ namespace ConsoleApp1
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

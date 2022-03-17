@@ -12,14 +12,17 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Begin Game...");
             RollGame game = new RollGame();
-            // Introduce the game to the user
+            // Introduce The Game To The User
             string intro = @"
-            The Game\n"+
-            "Any number of players will take three turns rolling a collection of five dice hoping to match numbers 4, 5, and 6.\n"+
-            "The player has exactly THREE rolls to obtain a 4, 5, and 6 - and if that player obtains all three numbers within\n"+
-             "three rolls - that player can now start accumulating points.\n"+
-             "The player cannot accumulate points without acquiring the three numbers 4, 5, 6, first.\n"+
-             "The game can end in a draw. There is only one round for each player.";
+            The Game Rules
+            Players Will Take THREE Turns Rolling
+            A Collection Of Five Dice, They Hope To Match Numbers 4, 5, AND 6.
+            The Player Has EXACTLY THREE Rolls To Obtain A 4, 5, AND 6
+            If The Player Obtains All Three Numbers In Three Rolls
+            That Player Can Start To Accumulate Points
+            The Player Cannot Accumulate Points Without Acquiring The Three Numbers 4, 5, 6, First.
+            The Game Can End In A Draw
+            There Is One Round Per Player";
             Console.WriteLine(intro);
             bool playAgain = true;
             while (playAgain)
@@ -35,12 +38,12 @@ namespace ConsoleApp1
                         // Press Enter To Roll
                         Console.ReadKey();
                         List<int> rolled = game.RollDice(game.numberOfDice);
-                        // Display what we rolled
+                        // Display What We Rolled
                         DisplayDiceRolled(rolled);
                         // Gather Dice Data From Roll
                         for (int di = 0; di < rolled.Count - 1; di++)
                         {
-                            // Only remove one di per match if not matched
+                            // Remove One Die Per Match If Matched
                             if (game.runTimeManager.ContainsKey(rolled[di]))
                             {
                                 if (game.runTimeManager[rolled[di]] == 0)
@@ -51,7 +54,7 @@ namespace ConsoleApp1
                                 }
                             }
                         }
-                        // If Player Got 4, 5, 6
+                        // If Player Gets 4, 5, 6
                         Console.WriteLine(game.ReturnCard());
                         int sum = 0;
                         foreach (int key in game.runTimeManager.Keys)
@@ -60,44 +63,44 @@ namespace ConsoleApp1
                         }
                         if (sum == 3)
                         {
-                            // The player is currently scoring.. nice
+                            // The Player Is Currently Scoring
                             int score = 0;
                             foreach (int di in rolled)
                             {
-                                // Add up remainging dice as score for player
+                                // Add Up Remaining Dice To Score For Player
                                 score += di;
                             }
                             // Update The Players Score
                             game.UpdateScore(player, score);
-                            // Tell the player how many oints they just scored
-                            Console.WriteLine("Plus: " + score.ToString() + " points!!!");
+                            // Tell The Player How Many Points They Scored
+                            Console.WriteLine("Plus: " + score.ToString() + " Points!!!");
                         }
-                        // Determine of points aquired for each roll
+                        // Determine The Points Aquired For Each Roll
                         game.numberOfTurns -= 1;
-                    } // while (game.numberOfTurns > 0)
+                    } // While (game.numberOfTurns > 0)
                     DisplayPlayersCurrentsScores(game.ReturnScore());
-                    // Reset next player
+                    // Reset Next Player
                     game.clearStats();
                 }
-                // We want to see whats on the console for debugging
-                // The game is over print the final scores
+                // Lets See The Debugging
+                // Gme Over, Print Scores
                 DisplayPlayersCurrentsScores(game.ReturnScore());
-                // Use the final scores to determine WON
+                // Use Final Scores To Determine Who WON
                 if (game.playerOneScore > game.playerTwoScore)
                 {
-                    Console.WriteLine("PLAYER... ONE... IS... THE WINNER");
+                    Console.WriteLine("Player One Wins!");
                 }
                 else if (game.playerTwoScore > game.playerOneScore)
                 {
-                    Console.WriteLine("PLAYER...TWO... IS... THE WINNER");
+                    Console.WriteLine("Player Two Wins!");
                 }
                 else
                 {
-                    Console.WriteLine("THE GAME IS A DRAW");
+                    Console.WriteLine("The Game Ends In A Draw!");
                 }
                 // Determine If They Want To Play Again
-                Console.WriteLine("Would you like to play again?");
-                Console.WriteLine("Type 'Y' for Yes, hit 'Enter' for No.");
+                Console.WriteLine("Would You Like To Play Again?");
+                Console.WriteLine("Type 'Y' For Yes, Hit 'Enter' For No.");
                 Console.Write(":");
                 string userInput = Console.ReadLine();
                 // Validatating Input
@@ -106,25 +109,25 @@ namespace ConsoleApp1
                     playAgain = false;
                 }
             }
-            Console.WriteLine("GAME OVER");
-            Console.WriteLine("PRESS ENTER TO EXIT GAME");
+            Console.WriteLine("Game Over!");
+            Console.WriteLine("Press Enter To Exit Game.");
             Console.ReadKey();
         }
         static void DisplayWhosTurnItIs(int player)
         {
-            Console.WriteLine("It is player " + player.ToString() + "'s turn;");
+            Console.WriteLine("It Is Player " + player.ToString() + "'s Turn;");
         }
         static void DisplayRemainingTurns(int remainingRolls)
         {
-            Console.WriteLine("You have " + remainingRolls.ToString() + " remaining rolls.");
-            Console.WriteLine("Press enter to 'Roll' your dice...");
+            Console.WriteLine("You Have " + remainingRolls.ToString() + " Remaining Rolls.");
+            Console.WriteLine("Press Enter To 'Roll' Your Dice...");
         }
         static void DisplayDiceRolled(List<int> diceRolled)
         {
-            Console.WriteLine("You rolled:");
+            Console.WriteLine("You Rolled:");
             string print_dice = string.Empty;
-            // Iterate the device
-            // Print message to console
+            // Iterate Device
+            // Print Message To Console
             foreach (int di in diceRolled)
             {
                 if (diceRolled.IndexOf(di) == diceRolled.Count - 1)
@@ -145,4 +148,5 @@ namespace ConsoleApp1
         }
     }
 }
+
 
